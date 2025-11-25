@@ -50,7 +50,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Proses logout (POST /logout).
+     * Proses logout (POST /logout). ---TESTINGGG
      */
     public function logout(Request $request)
     {
