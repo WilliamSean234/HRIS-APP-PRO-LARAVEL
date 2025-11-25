@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRIS PRO - Sistem Informasi SDM</title>
+    <!-- Font Awesome untuk Icon -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Link CSS Files -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <!-- Inline Style for Font Awesome fallback (using local icon set for canvas) -->
+    <style>
+        /* Fallback for Font Awesome, ensuring icons display properly */
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-display: block;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2') format('woff2');
+        }
+
+        .fa-solid {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Menu -->
+        <div class="sidebar">
+            <div class="logo-container">
+                <h2>HRIS PRO</h2>
+                <small>Human Resources System</small>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" data-page="dashboard" onclick="loadPage('dashboard')">
+                        <i class="fa-solid fa-chart-line"></i> Dashboard
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="core-hr" onclick="loadPage('core-hr')">
+                        <i class="fa-solid fa-users"></i> Core HR
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="attendance" onclick="loadPage('attendance')">
+                        <i class="fa-solid fa-clock"></i> Time & Attendance
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="payroll" onclick="loadPage('payroll')">
+                        <i class="fa-solid fa-wallet"></i> Payroll
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="inputform-calendar"
+                        onclick="loadPage('inputform-calendar')">
+                        <i class="fa-solid fa-wallet"></i> Add Event
+                    </a>
+                </div>
+                <!-- 💥 LOGOUT BUTTON BARU -->
+                <div class="nav-item logout-link-container">
+                    <a href="#" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content Area (SPA Container) -->
+        <div class="main-content">
+            <div id="page-content">
+                <!-- Content will be loaded here by loadPage function -->
+                <p>Loading application...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals (Hidden by default) -->
+
+    <!-- 1. Modal Tambah/Edit Karyawan (Core HR) -->
+    <div id="employee-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Tambah Karyawan Baru</h3>
+                <button class="close-button" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="employee-form" onsubmit="handleEmployeeSubmit(event)">
+                    <input type="hidden" id="employee-id">
+                    <div>
+                        <label for="nik">NIK</label>
+                        <input type="text" id="nik" name="nik" required>
+                    </div>
+                    <div>
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="position">Jabatan</label>
+                        <input type="text" id="position" name="position" required>
+                    </div>
+                    <div>
+                        <label for="department">Departemen</label>
+                        <input type="text" id="department" name="department" required>
+                    </div>
+                    <div>
+                        <label for="contractStatus">Status Kontrak</label>
+                        <select id="contractStatus" name="contractStatus" required>
+                            <option value="Tetap">Tetap</option>
+                            <option value="Kontrak">Kontrak</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                        <button type="submit" id="modal-submit-button" class="btn btn-primary">Simpan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Modal Approval (Time & Attendance) -->
+    <div id="approval-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="approval-modal-title">Review Permintaan</h3>
+                <button class="close-button" onclick="closeApprovalModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="review-content">
+                    <!-- Detail record akan di-render di sini -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="processApproval('reject')"><i
+                        class="fa-solid fa-thumbs-down"></i> Tolak</button>
+                <button type="button" class="btn btn-success" onclick="processApproval('approve')"><i
+                        class="fa-solid fa-thumbs-up"></i> Setujui</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Modal Riwayat Cuti (Time & Attendance) -->
+    <div id="leave-history-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 id="leave-history-title">Riwayat Cuti Karyawan</h3>
+                <button class="close-button" onclick="closeLeaveHistoryModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Jenis Cuti</th>
+                            <th>Periode</th>
+                            <th>Durasi</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leave-history-table-body">
+                        <!-- Riwayat akan di-render di sini -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Modal Atur Shift (Time & Attendance) -->
+    <div id="shift-modal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Atur Jadwal & Shift Karyawan</h3>
+                <button class="close-button" onclick="closeShiftModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleShiftSubmit(event)">
+                    <div>
+                        <label for="shift-employee">Karyawan</label>
+                        <select id="shift-employee" required>
+                            <option value="2020001">Budi Santoso</option>
+                            <option value="2021005">Siti Aisyah</option>
+                            <option value="2022010">Joko Susilo</option>
+                            <option value="2023015">Rani Dewi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="shift-type">Pilih Shift</label>
+                        <select id="shift-type" required>
+                            <option value="Pagi A">Pagi A (08:00 - 17:00)</option>
+                            <option value="Siang B">Siang B (13:00 - 21:00)</option>
+                            <option value="Malam C">Malam C (21:00 - 05:00)</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeShiftModal()">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Shift</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 💥 START FORM LOGOUT TERSEMBUNYI -->
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+        </form>
+    <!-- 💥 END FORM LOGOUT TERSEMBUNYI -->
+
+    <!-- Link JS Files (Harus di akhir body) -->
+    <script src="js/data.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/render.js"></script>
+</body>
+
+</html>

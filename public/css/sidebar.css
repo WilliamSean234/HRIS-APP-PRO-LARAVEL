@@ -1,0 +1,96 @@
+/* css/sidebar.css - Gaya Sidebar dan Navigasi */
+
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: white;
+    padding: 20px;
+    flex-shrink: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    padding: 0 0 30px 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.logo-container h2 {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-bottom: none;
+    margin: 0;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    margin-bottom: 8px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    color: #b0b8c0;
+    /* Light text for links */
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: var(--sidebar-link-hover);
+    color: white;
+}
+
+.nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+}
+
+.nav-link i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments for sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .nav-item {
+        margin: 5px;
+    }
+
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .nav-link i {
+        margin-right: 5px;
+    }
+
+    .logo-container {
+        display: none;
+        /* Hide large logo on mobile */
+    }
+}

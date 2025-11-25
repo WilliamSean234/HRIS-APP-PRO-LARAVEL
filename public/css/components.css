@@ -1,0 +1,456 @@
+/* css/components.css - Gaya Komponen: Card, Button, Table, Tabs */
+
+/* --- Card --- */
+.card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.wide-card {
+    grid-column: 1 / -1;
+}
+
+/* --- Button --- */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #bd2130;
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    color: var(--text-dark);
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.action-buttons button,
+.action-buttons a {
+    margin-left: 5px;
+}
+
+/* --- Table --- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.data-table th {
+    background-color: #e9ecef;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.data-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* --- Badge / Status --- */
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.badge-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.badge-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.badge-warning {
+    background-color: var(--warning-color);
+    color: var(--text-dark);
+}
+
+.badge-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.badge-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* --- Tabs --- */
+.tabs-nav {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab-button {
+    padding: 10px 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+    transition: color 0.2s, border-bottom 0.2s;
+    margin-right: 5px;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-button:hover {
+    color: var(--primary-color);
+}
+
+.tab-button.active-tab,
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+}
+
+.tab-content {
+    padding: 10px 0;
+    display: none;
+    /* Controlled by JS */
+}
+
+.tab-content.active {
+    display: block;
+    /* Controlled by JS */
+}
+
+/* Detail Karyawan Specific */
+.detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.employee-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 3px solid var(--primary-color);
+}
+
+.data-field {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 5px;
+}
+
+.data-label {
+    font-weight: 600;
+    color: #555;
+    min-width: 150px;
+}
+
+.data-value {
+    flex-grow: 1;
+}
+
+/* Timeline Career */
+.timeline {
+    border-left: 3px solid #ccc;
+    padding-left: 20px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.timeline-item {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 3px solid white;
+}
+
+.timeline-date {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.timeline-detail {
+    margin-top: 5px;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 3px solid var(--primary-color);
+}
+
+/* --- Tambahan Layout Form Khusus Event Kalender --- */
+
+.hris-event-form {
+    padding: 0 20px 20px 20px;
+    /* Sesuaikan padding agar terlihat seperti card content */
+}
+
+/* Mengganti section-title dengan h3 yang lebih kecil dan tidak ada aksen garis tebal */
+.section-subtitle {
+    font-size: 1.15rem;
+    /* Lebih besar dari label, lebih kecil dari h2 */
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /* Memberi aksen garis bawah tipis seperti di gambar */
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 5px;
+}
+
+.form-group-full {
+    margin-bottom: 20px;
+}
+
+/* Layout 2 Kolom Utama (50%/50%) */
+.form-row-2col {
+    display: flex;
+    gap: 30px;
+    /* Ruang lebih lebar antar kolom */
+}
+
+.form-row-2col>.form-group-col {
+    flex: 1;
+    margin-bottom: 10px;
+    /* Kurangi margin bawah agar lebih rapat */
+}
+
+/* Layout 4 Kolom di dalam Detail Waktu */
+.form-row-4col {
+    display: flex;
+    gap: 15px;
+    /* Gap lebih kecil untuk 4 kolom */
+}
+
+.form-row-4col>.form-group-col {
+    flex: 1;
+    margin-bottom: 10px;
+}
+
+/* Layout Nested 2 Kolom (digunakan di bagian Ulangi Sampai Tanggal) */
+.form-row-2col-nested {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row-2col-nested>.form-group-col {
+    flex: 1;
+}
+
+/* Gaya untuk opsi radio/checkbox grup (Horizontal seperti di gambar) */
+.recurrence-options-group {
+    display: flex;
+    flex-direction: row;
+    /* Pastikan horizontal */
+    align-items: flex-start;
+    gap: 25px;
+    margin-top: 5px;
+    padding-top: 10px;
+}
+
+.recurrence-options-group label {
+    font-weight: normal;
+    cursor: pointer;
+    white-space: nowrap;
+    /* Jangan memutus baris */
+}
+
+/* Penyesuaian label input agar sesuai dengan gambar */
+.form-group-col label {
+    font-weight: 600;
+}
+
+/* Tombol Aksi - memastikan alignment kanan */
+.form-actions-footer {
+    padding-top: 20px;
+    text-align: right;
+    border-top: 1px solid #e9ecef;
+    margin-top: 15px;
+}
+
+
+/* --- CSS Tambahan untuk Layout Form Multi-Kolom (HRIS Event Form) --- */
+
+.hris-event-form {
+    padding-top: 5px;
+}
+
+/* Judul Sub-section */
+.section-subtitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 5px;
+}
+
+/* Layout 2 Kolom Utama (50%/50%) */
+.form-row-2col {
+    display: flex;
+    gap: 30px;
+}
+
+.form-row-2col>.form-group-col {
+    flex: 1;
+}
+
+/* Layout 4 Kolom di dalam Detail Waktu */
+.form-row-4col {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row-4col>.form-group-col {
+    flex: 1;
+}
+
+/* Layout Nested 2 Kolom */
+.form-row-2col-nested {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row-2col-nested>.form-group-col {
+    flex: 1;
+}
+
+/* Gaya untuk opsi radio/checkbox grup */
+.recurrence-options-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 25px;
+    margin-top: 5px;
+    padding-top: 10px;
+}
+
+.recurrence-options-group label {
+    font-weight: normal;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* --- TARGET SPESIFIK INPUT UNTUK MEMASTIKAN LEBAR PENUH DAN KONSISTENSI --- */
+.form-group-col input[type="text"],
+.form-group-col input[type="date"],
+.form-group-col input[type="time"],
+.form-group-col input[type="number"],
+.form-group-col select,
+/* Target input full width (Judul/Deskripsi Event) */
+.form-group-full input[type="text"],
+.form-group-full select {
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    /* Sangat penting untuk lebar 100% yang konsisten */
+    /* Input styling akan diwarisi dari base.css: border 1px solid #ccc, border-radius 4px */
+}
+
+.form-group-col label,
+.form-group-full label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-actions-footer {
+    text-align: right;
+    margin-top: 10px;
+}
+
